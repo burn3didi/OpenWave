@@ -1,0 +1,9 @@
+node_modules/
+data/*
+media/*
+!data/.gitkeep
+!media/.gitkeep
+demo/
+*.pem
+.env
+*.zip

@@ -1,0 +1,14 @@
+{
+  "name": "openwave",
+  "version": "0.1.0",
+  "description": "Ad-free music streaming platform for independent and royalty-free music",
+  "type": "module",
+  "private": true,
+  "engines": { "node": ">=22.13" },
+  "scripts": {
+    "start": "node --no-warnings server.js",
+    "test": "node --no-warnings --test \"test/*.test.js\"",
+    "demo": "bash scripts/make-demo-tracks.sh && node scripts/seed.js ./demo",
+    "seed": "node scripts/seed.js"
+  }
+}

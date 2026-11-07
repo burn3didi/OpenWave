@@ -1,0 +1,9 @@
+.git
+node_modules
+data
+media
+demo
+test
+*.pem
+.env
+*.zip

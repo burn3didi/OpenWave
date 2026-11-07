@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="dark light">
+  <meta name="theme-color" content="#0e1016">
+  <meta name="description" content="Ad-free music streaming for independent and royalty-free music.">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="icon" href="/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="OpenWave">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <title>OpenWave</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <h1 class="logo">Open<span>Wave</span></h1>
+      <p class="tagline">Free music. No ads. Ever.</p>
+      <nav>
+        <button class="nav-item active" data-view="library">Library</button>
+        <button class="nav-item" data-view="upload">Upload</button>
+      </nav>
+      <div class="side-head">
+        <h2>Playlists</h2>
+        <button id="new-playlist" class="icon-btn" title="New playlist" aria-label="New playlist" hidden>+</button>
+      </div>
+      <nav id="playlists"></nav>
+      <div id="account" class="account"></div>
+    </aside>
+
+    <main class="main">
+      <section id="view-library">
+        <header class="view-head">
+          <h2 id="view-title">Library</h2>
+          <input id="search" type="search" placeholder="Search title, artist, album" aria-label="Search">
+        </header>
+        <div id="tracks" class="tracks" aria-live="polite"></div>
+      </section>
+
+      <section id="view-upload" hidden>
+        <header class="view-head"><h2>Upload a track</h2></header>
+        <p id="upload-gate" class="hint" hidden>
+          Sign in to upload music.
+          <button type="button" class="link-btn inline" data-open-auth>Sign in</button>
+        </p>
+        <form id="upload-form" class="form">
+          <label>Audio file
+            <input name="file" type="file" accept="audio/*" required>
+          </label>
+          <label>Title <input name="title" required maxlength="200"></label>
+          <label>Artist <input name="artist" required maxlength="200"></label>
+          <label>Album <input name="album" maxlength="200"></label>
+          <label>License
+            <select name="license" id="license" required></select>
+          </label>
+          <label>Source URL (optional) <input name="source_url" type="url" placeholder="https://"></label>
+          <p class="hint">Only upload music you own or that is licensed for free redistribution (CC0, CC-BY, public domain, and so on).</p>
+          <button class="primary" type="submit">Upload</button>
+          <p id="upload-status" class="hint" role="status"></p>
+        </form>
+      </section>
+    </main>
+  </div>
+
+  <footer class="player" aria-label="Player">
+    <div class="now">
+      <div id="now-title" class="now-title">Nothing playing</div>
+      <div id="now-artist" class="now-artist"></div>
+    </div>
+    <div class="controls">
+      <button id="prev" class="icon-btn" aria-label="Previous">⏮</button>
+      <button id="play" class="icon-btn big" aria-label="Play">▶</button>
+      <button id="next" class="icon-btn" aria-label="Next">⏭</button>
+    </div>
+    <div class="seek">
+      <span id="cur">0:00</span>
+      <input id="seek" type="range" min="0" max="1000" value="0" aria-label="Seek">
+      <span id="dur">0:00</span>
+    </div>
+    <input id="volume" class="volume" type="range" min="0" max="1" step="0.01" value="1" aria-label="Volume">
+    <audio id="audio" preload="metadata"></audio>
+  </footer>
+
+  <dialog id="auth-dialog" aria-labelledby="auth-title">
+    <form id="auth-form" class="form">
+      <h2 id="auth-title">Sign in</h2>
+      <label>Email <input name="email" type="email" required autocomplete="email" maxlength="254"></label>
+      <label>Password
+        <input name="password" type="password" required minlength="10" maxlength="200" autocomplete="current-password">
+      </label>
+      <p id="auth-error" class="hint error" role="alert"></p>
+      <button class="primary" type="submit" id="auth-submit">Sign in</button>
+      <button type="button" id="auth-toggle" class="link-btn">Create an account</button>
+      <button type="button" id="auth-cancel" class="link-btn">Cancel</button>
+    </form>
+  </dialog>
+
+  <script type="module" src="/app.js"></script>
+</body>
+</html>
